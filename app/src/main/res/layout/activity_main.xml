@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/dynamic_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toggle Dynamic Theme"
+        app:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/recreate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recreate"
+        app:layout_constraintBottom_toTopOf="@+id/get_colors"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dynamic_theme" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/get_colors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Colors"
+        app:layout_constraintBottom_toTopOf="@+id/save_colors"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recreate_button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/save_colors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Colors"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_colors"
+        app:layout_constraintVertical_bias="0.852" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/dynamic_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/change_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:contentDescription="FAB"
+        android:focusable="true"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_round_edit" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
