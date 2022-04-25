@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.quickersilver.themeengine.ThemeChooserDialog
+import com.quickersilver.themeengine.ThemeChooserDialogBuilder
 import com.quickersilver.themeengine.ThemeEngine
 import com.quickersilver.themeengine.sample.databinding.ActivityMainBinding
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         val themeEngine = ThemeEngine.getInstance(this)
 
         binding.changeTheme.setOnClickListener {
-            ThemeChooserDialog(this)
+            ThemeChooserDialogBuilder(this)
                 .setTitle(R.string.choose_theme)
                 .setPositiveButton("OK") { _, theme ->
                     themeEngine.staticTheme = theme

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.quickersilver.themeengine.ThemeChooserDialog
+import com.quickersilver.themeengine.ThemeChooserDialogBuilder
 import com.quickersilver.themeengine.ThemeEngine
 import com.quickersilver.themeengine.ThemeMode
 import com.quickersilver.themeengine.sample.databinding.FragmentSettingsBinding
@@ -54,7 +54,7 @@ class SettingsFragment : BottomSheetDialogFragment() {
             }
         }
         binding.changeTheme.setOnClickListener {
-            ThemeChooserDialog(requireContext())
+            ThemeChooserDialogBuilder(requireContext())
                 .setTitle(R.string.choose_theme)
                 .setPositiveButton("OK") { _, theme ->
                     themeEngine.staticTheme = theme
