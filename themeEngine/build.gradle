@@ -3,13 +3,36 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+ext {
+    PUBLISH_GROUP_ID = 'io.github.prathameshmm02.themeEngine'
+    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_ARTIFACT_ID = 'themeEngine'
+    PUBLISH_DESCRIPTION = 'A Material Design 3 Theme Engine for Android'
+    PUBLISH_URL = 'https://github.com/prathameshmm02/ThemeEngine'
+    PUBLISH_LICENSE_NAME = 'Apache License'
+    PUBLISH_LICENSE_URL =
+            'https://github.com/prathameshmm02/ThemeEngine/blob/master/LICENSE'
+    PUBLISH_DEVELOPER_ID = 'quickersilver'
+    PUBLISH_DEVELOPER_NAME = 'Prathamesh More'
+    PUBLISH_DEVELOPER_EMAIL = 'prathameshmm02@gmail.com'
+    PUBLISH_SCM_CONNECTION =
+            'scm:git:github.com/prathameshmm02/ThemeEngine.git'
+    PUBLISH_SCM_DEVELOPER_CONNECTION =
+            'scm:git:ssh://github.com/prathameshmm02/ThemeEngine.git'
+    PUBLISH_SCM_URL =
+                'https://github.com/prathameshmm02/ThemeEngine/tree/master'
+}
+
+apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
+
 android {
     compileSdk 32
 
     defaultConfig {
         minSdk 21
         targetSdk 32
-        consumerProguardFiles "consumer-rules.pro"
+        versionCode 1
+        versionName "1.0.0"
     }
 
     buildTypes {
