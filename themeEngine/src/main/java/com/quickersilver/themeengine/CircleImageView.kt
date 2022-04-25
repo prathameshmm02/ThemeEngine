@@ -1,6 +1,7 @@
 package com.quickersilver.themeengine
 
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
@@ -41,6 +42,7 @@ class CircleImageView @JvmOverloads constructor(
 
     private lateinit var shapeDrawableAnimator: ValueAnimator
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -53,17 +55,7 @@ class CircleImageView @JvmOverloads constructor(
                 shapeDrawableAnimator.start()
             }
             MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_UP -> {
-                if (shapeDrawableAnimator.isRunning) {
-                    shapeDrawableAnimator.reverse()
-                } else {
-                    shapeDrawableAnimator = ValueAnimator.ofFloat(4f, 2f)
-                    shapeDrawableAnimator.addUpdateListener {
-                        (background as MaterialShapeDrawable).setCornerSize(CornerSize { rect ->
-                            return@CornerSize rect.height() / it.animatedValue as Float
-                        })
-                    }
-                    shapeDrawableAnimator.start()
-                }
+                shapeDrawableAnimator.reverse()
             }
         }
         return super.onTouchEvent(event)

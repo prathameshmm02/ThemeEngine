@@ -5,26 +5,61 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
 class ThemeEngine(context: Context) {
-    private val mEditor = PreferenceManager.getDefaultSharedPreferences(context)
+    private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+
+    var themeMode: ThemeMode
+        get() = when (prefs.getInt(THEME_MODE, 0)) {
+            0 -> ThemeMode.AUTO
+            1 -> ThemeMode.LIGHT
+            2 -> ThemeMode.DARK
+            else -> ThemeMode.AUTO
+        }
+        set(value) {
+            prefs.edit {
+                putInt(
+                    THEME_MODE,
+                    when (value) {
+                        ThemeMode.AUTO -> 0
+                        ThemeMode.LIGHT -> 1
+                        ThemeMode.DARK -> 2
+                    }
+                )
+            }
+            AppCompatDelegate.setDefaultNightMode(
+                when (themeMode) {
+                    ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+                    ThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
+                    else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                }
+            )
+        }
+
+    private val nightMode
+        get() = when (themeMode) {
+            ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
+            ThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
+            else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        }
 
     var isDynamicTheme
-        get() = mEditor.getBoolean(DYNAMIC_THEME, Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-        set(value) = mEditor.edit { putBoolean(DYNAMIC_THEME, value) }
+        get() = prefs.getBoolean(DYNAMIC_THEME, Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+        set(value) = prefs.edit { putBoolean(DYNAMIC_THEME, value) }
 
     fun getTheme(): Int {
         return if (isDynamicTheme) R.style.Theme_ThemeEngine_Dynamic else staticTheme
     }
 
     var staticTheme
-        get() = mEditor.getInt(APP_THEME, R.style.Theme_ThemeEngine_Blue)
-        set(value) = mEditor.edit { putInt(APP_THEME, value) }
+        get() = prefs.getInt(APP_THEME, R.style.Theme_ThemeEngine_Blue)
+        set(value) = prefs.edit { putInt(APP_THEME, value) }
 
     fun resetTheme() {
-        mEditor.edit { remove(APP_THEME) }
+        prefs.edit { remove(APP_THEME) }
     }
 
     companion object {
@@ -49,9 +84,13 @@ class ThemeEngine(context: Context) {
         }
 
         fun applyToActivity(activity: Activity) {
-            activity.setTheme(getInstance(activity).getTheme())
+            with(getInstance(activity)) {
+                activity.setTheme(getTheme())
+                AppCompatDelegate.setDefaultNightMode(nightMode)
+            }
         }
 
+        const val THEME_MODE = "theme_mode"
         const val DYNAMIC_THEME = "dynamic_theme"
         const val APP_THEME = "app_theme"
     }
@@ -62,7 +101,7 @@ private class ThemeEngineActivityCallback : Application.ActivityLifecycleCallbac
         activity: Activity,
         savedInstanceState: Bundle?
     ) {
-        activity.setTheme(ThemeEngine.getInstance(activity).getTheme())
+        ThemeEngine.applyToActivity(activity)
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}

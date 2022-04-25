@@ -14,9 +14,9 @@ import com.quickersilver.themeengine.databinding.RecyclerviewBinding
 
 class ThemeChooserDialog(
     private val context: Context,
-    private val THEMES: List<Int> = themes,
-    private val PRIMARY_COLORS_LIGHT: List<Int> = primaryColorsLight,
-    private val PRIMARY_COLORS_DARK: List<Int> = primaryColorsDark,
+    private val themes: List<Int> = Themes.themes,
+    private val primaryColorsLight: List<Int> = Themes.primaryColorsLight,
+    private val primaryColorsDark: List<Int> = Themes.primaryColorsDark,
 ) {
 
     private lateinit var builder: MaterialAlertDialogBuilder
@@ -24,10 +24,10 @@ class ThemeChooserDialog(
     private lateinit var colorAdapter: ColorAdapter
 
     init {
-        require(THEMES.size == PRIMARY_COLORS_DARK.size) {
-            "List size themes not equal to list size of primary colors"
+        require(themes.size == primaryColorsDark.size) {
+            "List size of themes not equal to list size of primary colors"
         }
-        require(PRIMARY_COLORS_DARK.size == PRIMARY_COLORS_LIGHT.size) {
+        require(primaryColorsDark.size == primaryColorsLight.size) {
             "List size of primary colors is different"
         }
         createDialog()
@@ -38,12 +38,12 @@ class ThemeChooserDialog(
 
         val themeEngine = ThemeEngine.getInstance(context)
         val colorArray = if (context.isDarkMode) {
-            PRIMARY_COLORS_DARK
+            primaryColorsDark
         } else {
-            PRIMARY_COLORS_LIGHT
+            primaryColorsLight
         }
         colorAdapter = ColorAdapter(colorArray)
-        colorAdapter.checkedPosition = THEMES.indexOf(themeEngine.staticTheme)
+        colorAdapter.setCheckedPosition(themes.indexOf(themeEngine.staticTheme))
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 4)
             adapter = colorAdapter
@@ -66,7 +66,7 @@ class ThemeChooserDialog(
         builder.setPositiveButton(text) { _, which ->
             if (which == BUTTON_POSITIVE) {
                 val checkedPosition = colorAdapter.checkedPosition
-                val theme = THEMES[checkedPosition]
+                val theme = themes[checkedPosition]
                 listener.onClick(checkedPosition, theme)
             }
         }
@@ -92,7 +92,7 @@ class ThemeChooserDialog(
         builder.setNeutralButton(text) { _, which ->
             if (which == BUTTON_NEUTRAL) {
                 val checkedPosition = colorAdapter.checkedPosition
-                val theme = THEMES[checkedPosition]
+                val theme = themes[checkedPosition]
                 listener.onClick(checkedPosition, theme)
             }
         }

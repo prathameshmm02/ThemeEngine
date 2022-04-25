@@ -9,12 +9,14 @@ class ColorAdapter(private val colorArray: List<Int>) :
     RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
 
     var checkedPosition = -1
-        set(value) {
-            val lastCheckedPosition: Int = checkedPosition
-            field = value
-            notifyItemChanged(lastCheckedPosition)
-            notifyItemChanged(value)
-        }
+    private set
+
+    fun setCheckedPosition(value: Int) {
+        val lastCheckedPosition: Int = checkedPosition
+        checkedPosition = value
+        notifyItemChanged(lastCheckedPosition)
+        notifyItemChanged(value)
+    }
 
     init {
         setHasStableIds(true)
