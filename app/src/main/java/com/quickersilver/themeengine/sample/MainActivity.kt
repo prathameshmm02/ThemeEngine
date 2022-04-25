@@ -1,28 +1,22 @@
 package com.quickersilver.themeengine.sample
 
-import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.quickersilver.themeengine.ThemeChooserDialog
 import com.quickersilver.themeengine.ThemeEngine
 import com.quickersilver.themeengine.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("CheckResult")
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeEngine.applyToActivity(this)
         super.onCreate(savedInstanceState)
+        ThemeEngine.applyToActivity(this)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val themeEngine = ThemeEngine.getInstance(this)
 
-        binding.dynamicTheme.setOnClickListener {
-            themeEngine.isDynamicTheme = !themeEngine.isDynamicTheme
-            recreate()
-        }
-        binding.recreateButton.setOnClickListener {
-            recreate()
-        }
         binding.changeTheme.setOnClickListener {
             ThemeChooserDialog(this)
                 .setTitle(R.string.choose_theme)
@@ -39,5 +33,17 @@ class MainActivity : AppCompatActivity() {
                 .create()
                 .show()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.settings) {
+            SettingsFragment().show(supportFragmentManager, "Settings")
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

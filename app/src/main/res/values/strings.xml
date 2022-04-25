@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Theme Engine</string>
-
     <string name="choose_theme">Choose Theme</string>
+    <string name="settings">Settings</string>
 </resources>

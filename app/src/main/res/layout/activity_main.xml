@@ -7,48 +7,14 @@
     tools:ignore="HardcodedText">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/dynamic_theme"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Toggle Dynamic Theme"
-        app:elevation="10dp"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/recreate_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recreate"
-        app:layout_constraintBottom_toTopOf="@+id/get_colors"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dynamic_theme" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/get_colors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Colors"
-        app:layout_constraintBottom_toTopOf="@+id/save_colors"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recreate_button" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/save_colors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save Colors"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/get_colors"
-        app:layout_constraintVertical_bias="0.852" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -56,12 +22,60 @@
         android:layout_margin="12dp"
         app:cardCornerRadius="40dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/dynamic_theme"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_primary"
+        style="@style/Widget.Material3.FloatingActionButton.Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="FAB"
+        android:focusable="true"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_secondary"
+        app:layout_constraintEnd_toStartOf="@+id/fab_secondary"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fab_secondary"
+        app:srcCompat="@drawable/ic_add" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_secondary"
+        style="@style/Widget.Material3.FloatingActionButton.Secondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:contentDescription="FAB"
+        android:focusable="true"
+        app:fabSize="auto"
+        app:layout_constraintEnd_toStartOf="@+id/fab_tertiary"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fab_primary"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/ic_add" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_tertiary"
+        style="@style/Widget.Material3.FloatingActionButton.Tertiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="FAB"
+        android:focusable="true"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fab_secondary"
+        app:layout_constraintTop_toTopOf="@+id/fab_secondary"
+        app:srcCompat="@drawable/ic_add" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/change_theme"
@@ -75,5 +89,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_round_edit" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Primary"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/fab_primary"
+        app:layout_constraintStart_toStartOf="@+id/fab_primary"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginVertical="16dp"
+        android:text="Secondary"
+        app:layout_constraintEnd_toEndOf="@+id/fab_secondary"
+        app:layout_constraintStart_toStartOf="@+id/fab_secondary"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="Secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/fab_tertiary"
+        app:layout_constraintStart_toStartOf="@+id/fab_tertiary"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
