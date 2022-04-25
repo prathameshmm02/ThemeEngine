@@ -94,3 +94,7 @@ Reset static theme to default
 ```kotlin
 themeEngine.resetTheme()
 ```
+
+## Working
+ThemeOverlays are used to apply theme colors to activities. This library contains 20 ThemeOverlays one of which is Dynamic which is used only when dynamic color is enabled other are used by user's choice.  
+The themes are created with [MaterialThemeBuilder](https://material-foundation.github.io/material-theme-builder/#/custom) by using [Material Colors](https://material.io/design/color/the-color-system.html#tools-for-picking-colors).
