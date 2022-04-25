@@ -3,6 +3,12 @@
 This library allows you to set Material 3 themes to your app. You can also manage dark mode and dynamic colors in your app. All changes are saved to SharedPreferences no need to manage it manually.
 
 <b>Note</b>: This library does not support dynamic colors on devices lower than Android 12 i.e. API 31.
+
+## Screenshots
+| <img src="screenshots/theme_chooser_light.png" width="200"/>| <img src="screenshots/theme_chooser_dark.png" width="200"/>| <img src="screenshots/blue_light.png" width="200"/>| <img src="screenshots/blue_dark.png" width="200"/>|
+|:---:|:---:|:---:|:---:| 
+| <img src="screenshots/pink_light.png" width="200"/>| <img src="screenshots/pink_dark.png" width="200"/>| <img src="screenshots/yellow_light.png" width="200"/>| <img src="screenshots/yellow_dark.png" width="200"/>|
+
 ## How to use
 ### Getting Started
 Add the following gradle dependency to your build.gradle
