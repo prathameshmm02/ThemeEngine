@@ -62,15 +62,15 @@ class ThemeEngine(context: Context) {
         set(value) = prefs.edit { putBoolean(DYNAMIC_THEME, value) }
 
     /**
-     * Get current app theme if {@link isDynamicTheme} is enabled or a static theme instead.
-     * @return a dynamic theme if
+     * Get current app theme.
+     * @return a dynamic theme if isDynamicTheme is enabled or a static theme otherwise.
      */
     fun getTheme(): Int {
         return if (isDynamicTheme) R.style.Theme_ThemeEngine_Dynamic else staticTheme
     }
 
     /**
-     * Get current static app theme
+     * Get current static app theme, the theme which is used when dynamic color is disabled
      */
     var staticTheme
         get() = prefs.getInt(APP_THEME, R.style.Theme_ThemeEngine_Blue)
