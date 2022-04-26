@@ -5,9 +5,14 @@ This library allows you to set Material 3 themes to your app. You can also manag
 <b>Note</b>: This library does not support dynamic colors on devices lower than Android 12 i.e. API 31.
 
 ## Screenshots
-| <img src="screenshots/theme_chooser_light.png" width="200"/>| <img src="screenshots/theme_chooser_dark.png" width="200"/>| <img src="screenshots/blue_light.png" width="200"/>| <img src="screenshots/blue_dark.png" width="200"/>|
-|:---:|:---:|:---:|:---:| 
-| <img src="screenshots/pink_light.png" width="200"/>| <img src="screenshots/pink_dark.png" width="200"/>| <img src="screenshots/yellow_light.png" width="200"/>| <img src="screenshots/yellow_dark.png" width="200"/>|
+### Themes 
+| Light | Dark |
+|:---:|:---:|
+| <img src="screenshots/light_themes.gif" width="400"/>| <img src="screenshots/dark_themes.gif" width="400"/>|
+### Theme Chooser
+| Light | Dark |
+|:---:|:---:|
+| <img src="screenshots/theme_chooser_light.png" width="200"/>| <img src="screenshots/theme_chooser_dark.png" width="200"/>|
 
 ## How to use
 ### Getting Started
