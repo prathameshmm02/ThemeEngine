@@ -48,6 +48,7 @@
 
 
     <TextView
+        android:id="@+id/dynamic_color_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -80,11 +81,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/change_theme"
+        style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Change theme"
-        style="@style/Widget.Material3.Button.ElevatedButton"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:text="Change theme" />
 
 </LinearLayout>

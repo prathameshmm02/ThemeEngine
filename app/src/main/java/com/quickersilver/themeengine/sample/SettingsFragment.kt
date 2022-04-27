@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.quickersilver.themeengine.ThemeChooserDialogBuilder
 import com.quickersilver.themeengine.ThemeEngine
 import com.quickersilver.themeengine.ThemeMode
+import com.quickersilver.themeengine.hasS
 import com.quickersilver.themeengine.sample.databinding.FragmentSettingsBinding
 
 class SettingsFragment : BottomSheetDialogFragment() {
@@ -26,12 +28,27 @@ class SettingsFragment : BottomSheetDialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.dynamicGroup.check(if (themeEngine.isDynamicTheme) R.id.dynamic_on else R.id.dynamic_off)
+        if (hasS()) {
+            binding.dynamicGroup.check(if (themeEngine.isDynamicTheme) R.id.dynamic_on else R.id.dynamic_off)
+            binding.dynamicGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+                if (isChecked) {
+                    when (checkedId) {
+                        R.id.dynamic_off -> themeEngine.isDynamicTheme = false
+                        R.id.dynamic_on -> themeEngine.isDynamicTheme = true
+                    }
+                    requireActivity().recreate()
+                }
+            }
+        } else {
+            binding.dynamicColorLabel.isVisible = false
+            binding.dynamicGroup.isVisible = false
+        }
         binding.themeGroup.check(
             when (themeEngine.themeMode) {
                 ThemeMode.AUTO -> R.id.auto_theme
                 ThemeMode.LIGHT -> R.id.light_theme
                 ThemeMode.DARK -> R.id.dark_theme
+                else -> R.id.auto_theme
             }
         )
         binding.themeGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
@@ -42,15 +59,6 @@ class SettingsFragment : BottomSheetDialogFragment() {
                     R.id.dark_theme -> ThemeMode.DARK
                     else -> ThemeMode.AUTO
                 }
-            }
-        }
-        binding.dynamicGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (isChecked) {
-                when (checkedId) {
-                    R.id.dynamic_off -> themeEngine.isDynamicTheme = false
-                    R.id.dynamic_on -> themeEngine.isDynamicTheme = true
-                }
-                requireActivity().recreate()
             }
         }
         binding.changeTheme.setOnClickListener {

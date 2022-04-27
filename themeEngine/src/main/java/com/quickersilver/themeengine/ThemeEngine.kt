@@ -66,7 +66,7 @@ class ThemeEngine(context: Context) {
      * @return a dynamic theme if isDynamicTheme is enabled or a static theme otherwise.
      */
     fun getTheme(): Int {
-        return if (isDynamicTheme) R.style.Theme_ThemeEngine_Dynamic else staticTheme
+        return if (hasS() && isDynamicTheme) R.style.Theme_ThemeEngine_Dynamic else staticTheme
     }
 
     /**
