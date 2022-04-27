@@ -14,27 +14,13 @@ class ThemeEngine(context: Context) {
     private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
     /**
-     * Returns current ThemeMode.
+     * Returns current [ThemeMode].
      * Setting this property applies the given theme mode to the activity.
      */
-    var themeMode: ThemeMode
-        get() = when (prefs.getInt(THEME_MODE, 0)) {
-            0 -> ThemeMode.AUTO
-            1 -> ThemeMode.LIGHT
-            2 -> ThemeMode.DARK
-            else -> ThemeMode.AUTO
-        }
+    var themeMode: Int
+        get() = prefs.getInt(THEME_MODE, 0)
         set(value) {
-            prefs.edit {
-                putInt(
-                    THEME_MODE,
-                    when (value) {
-                        ThemeMode.AUTO -> 0
-                        ThemeMode.LIGHT -> 1
-                        ThemeMode.DARK -> 2
-                    }
-                )
-            }
+            prefs.edit { putInt(THEME_MODE, value) }
             AppCompatDelegate.setDefaultNightMode(
                 when (themeMode) {
                     ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
@@ -63,7 +49,7 @@ class ThemeEngine(context: Context) {
 
     /**
      * Get current app theme.
-     * @return a dynamic theme if isDynamicTheme is enabled or a static theme otherwise.
+     * @return a dynamic theme if [isDynamicTheme] is enabled or a static theme otherwise.
      */
     fun getTheme(): Int {
         return if (hasS() && isDynamicTheme) R.style.Theme_ThemeEngine_Dynamic else staticTheme
@@ -86,6 +72,7 @@ class ThemeEngine(context: Context) {
     companion object {
         private var INSTANCE: ThemeEngine? = null
 
+        @JvmStatic
         fun getInstance(context: Context): ThemeEngine {
             val currentInstance = INSTANCE
 
@@ -101,9 +88,10 @@ class ThemeEngine(context: Context) {
         }
 
         /**
-         * Applies themes and night mode to all activities by registering a ActivityLifecycleCallbacks to your application.
+         * Applies themes and night mode to all activities by registering a [ActivityLifecycleCallbacks] to your application.
          * @param application Target Application
          */
+        @JvmStatic
         fun applyToActivities(application: Application) {
             application.registerActivityLifecycleCallbacks(ThemeEngineActivityCallback())
         }
@@ -112,6 +100,7 @@ class ThemeEngine(context: Context) {
          * Applies themes and night mode to given activity
          * @param activity Target activity
          */
+        @JvmStatic
         fun applyToActivity(activity: Activity) {
             with(getInstance(activity)) {
                 activity.setTheme(getTheme())
@@ -119,9 +108,9 @@ class ThemeEngine(context: Context) {
             }
         }
 
-        const val THEME_MODE = "theme_mode"
-        const val DYNAMIC_THEME = "dynamic_theme"
-        const val APP_THEME = "app_theme"
+        private const val THEME_MODE = "theme_mode"
+        private const val DYNAMIC_THEME = "dynamic_theme"
+        private const val APP_THEME = "app_theme"
     }
 }
 
