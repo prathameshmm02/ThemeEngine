@@ -1,4 +1,7 @@
 # A Material Design 3 Theme Engine for Android
+[![Android CI](https://github.com/prathameshmm02/ThemeEngine/actions/workflows/android.yml/badge.svg)](https://github.com/prathameshmm02/ThemeEngine/actions/workflows/android.yml)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.prathameshmm02.themeEngine/themeEngine.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.prathameshmm02.themeEngine%22%20AND%20a:%22themeEngine%22)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This library allows you to set Material 3 themes to your app. You can also manage dark mode and dynamic colors in your app. All changes are saved to SharedPreferences no need to manage it manually.
 
