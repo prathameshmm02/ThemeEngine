@@ -551,4 +551,9 @@
         <item name="colorSurfaceInverse">@color/yellow_dark_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/yellow_dark_primaryInverse</item>
     </style>
+
+    <style name="ThemeOverlay.Black" parent="ThemeOverlay.AppCompat">
+        <item name="colorSurface">@android:color/black</item>
+        <item name="android:windowBackground">?colorSurface</item>
+    </style>
 </resources>

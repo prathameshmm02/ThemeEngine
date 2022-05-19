@@ -553,4 +553,6 @@
         <item name="colorSurfaceInverse">@color/yellow_light_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/yellow_light_primaryInverse</item>
     </style>
+
+    <style name="ThemeOverlay.Black" parent="ThemeOverlay.AppCompat"/>
 </resources>

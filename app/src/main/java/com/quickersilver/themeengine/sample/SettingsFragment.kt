@@ -51,6 +51,18 @@ class SettingsFragment : BottomSheetDialogFragment() {
                 else -> R.id.auto_theme
             }
         )
+
+        binding.trueBlackGroup.check(if (themeEngine.isTrueBlack) R.id.true_black_on else R.id.true_black_off)
+        binding.trueBlackGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                themeEngine.isTrueBlack = when (checkedId) {
+                    R.id.true_black_on -> true
+                    else -> false
+                }
+                requireActivity().recreate()
+            }
+        }
+
         binding.themeGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 themeEngine.themeMode = when (checkedId) {

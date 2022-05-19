@@ -69,6 +69,10 @@ class ThemeEngine(context: Context) {
         prefs.edit { remove(APP_THEME) }
     }
 
+    var isTrueBlack
+        get() = prefs.getBoolean(TRUE_BLACK, false)
+        set(value) = prefs.edit { putBoolean(TRUE_BLACK, value) }
+
     companion object {
         private var INSTANCE: ThemeEngine? = null
 
@@ -103,7 +107,10 @@ class ThemeEngine(context: Context) {
         @JvmStatic
         fun applyToActivity(activity: Activity) {
             with(getInstance(activity)) {
-                activity.setTheme(getTheme())
+                activity.theme.applyStyle(getTheme(), true)
+                if (isTrueBlack) {
+                    activity.theme.applyStyle(R.style.ThemeOverlay_Black, true)
+                }
                 AppCompatDelegate.setDefaultNightMode(nightMode)
             }
         }
@@ -111,6 +118,7 @@ class ThemeEngine(context: Context) {
         private const val THEME_MODE = "theme_mode"
         private const val DYNAMIC_THEME = "dynamic_theme"
         private const val APP_THEME = "app_theme"
+        private const val TRUE_BLACK = "true_black"
     }
 }
 
