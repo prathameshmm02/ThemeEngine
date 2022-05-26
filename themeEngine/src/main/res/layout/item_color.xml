@@ -15,7 +15,7 @@
         android:layout_margin="8dp"
         android:checkable="true"
         app:contentPadding="12dp"
-        tools:backgroundTint="@color/blue_light_primary"
+        tools:backgroundTint="@color/blue_primary"
         tools:ignore="ContentDescription" />
 
 </FrameLayout>
