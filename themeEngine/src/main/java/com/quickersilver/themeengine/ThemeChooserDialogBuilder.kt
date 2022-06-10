@@ -6,7 +6,6 @@ import android.content.DialogInterface.BUTTON_POSITIVE
 import android.view.LayoutInflater
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.annotation.StyleRes
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -15,30 +14,17 @@ import com.quickersilver.themeengine.databinding.RecyclerviewBinding
 /**
  * Builder class to create a Theme Chooser Dialog
  * @param context Context to use
- * @param themes list of themes
- * @param primaryColorsLight list of primary light colors of the above themes
- * @param primaryColorsDark list of primary dark colors of the above themes
  * @return ThemeChooserDialogBuilder
  * @author Prathamesh M
  */
-class ThemeChooserDialogBuilder(
-    private val context: Context,
-    private val themes: List<Int> = Themes.themes,
-    private val primaryColorsLight: List<Int> = Themes.primaryColorsLight,
-    private val primaryColorsDark: List<Int> = Themes.primaryColorsDark,
-) {
+class ThemeChooserDialogBuilder(private val context: Context) {
 
     private lateinit var builder: MaterialAlertDialogBuilder
 
     private lateinit var colorAdapter: ColorAdapter
+    private val themes = Theme.values()
 
     init {
-        require(themes.size == primaryColorsDark.size) {
-            "List size of themes not equal to list size of primary colors"
-        }
-        require(primaryColorsDark.size == primaryColorsLight.size) {
-            "List size of primary colors is different"
-        }
         createDialog()
     }
 
@@ -46,13 +32,9 @@ class ThemeChooserDialogBuilder(
         val binding = RecyclerviewBinding.inflate(LayoutInflater.from(context))
 
         val themeEngine = ThemeEngine.getInstance(context)
-        val colorArray = if (context.isDarkMode) {
-            primaryColorsDark
-        } else {
-            primaryColorsLight
-        }
+        val colorArray = themes.map { it.primaryColor }
         colorAdapter = ColorAdapter(colorArray)
-        colorAdapter.setCheckedPosition(themes.indexOf(themeEngine.staticTheme))
+        colorAdapter.setCheckedPosition(themeEngine.staticTheme)
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 4)
             adapter = colorAdapter
@@ -70,6 +52,7 @@ class ThemeChooserDialogBuilder(
         builder.setTitle(res)
         return this
     }
+
     /**
      * Set icon for the Dialog using the given drawable resource id
      * @return This Builder object to allow for chaining of calls to set methods
@@ -89,8 +72,7 @@ class ThemeChooserDialogBuilder(
         builder.setPositiveButton(text) { _, which ->
             if (which == BUTTON_POSITIVE) {
                 val checkedPosition = colorAdapter.checkedPosition
-                val theme = themes[checkedPosition]
-                listener.onClick(checkedPosition, theme)
+                listener.onClick(checkedPosition, themes[checkedPosition])
             }
         }
         return this
@@ -102,7 +84,10 @@ class ThemeChooserDialogBuilder(
      * @param listener The OnClickListener to use when the button is clicked.
      * @return This Builder object to allow for chaining of calls to set methods
      */
-    fun setPositiveButton(@StringRes res: Int, listener: OnClickListener): ThemeChooserDialogBuilder {
+    fun setPositiveButton(
+        @StringRes res: Int,
+        listener: OnClickListener
+    ): ThemeChooserDialogBuilder {
         setPositiveButton(context.getString(res), listener)
         return this
     }
@@ -150,7 +135,10 @@ class ThemeChooserDialogBuilder(
      * @param listener The OnClickListener to use when the button is clicked.
      * @return This Builder object to allow for chaining of calls to set methods
      */
-    fun setNeutralButton(@StringRes res: Int, listener: OnClickListener): ThemeChooserDialogBuilder {
+    fun setNeutralButton(
+        @StringRes res: Int,
+        listener: OnClickListener
+    ): ThemeChooserDialogBuilder {
         setNeutralButton(context.getString(res), listener)
         return this
     }
@@ -163,6 +151,6 @@ class ThemeChooserDialogBuilder(
     }
 
     fun interface OnClickListener {
-        fun onClick(position: Int, @StyleRes theme: Int)
+        fun onClick(position: Int, theme: Theme)
     }
 }

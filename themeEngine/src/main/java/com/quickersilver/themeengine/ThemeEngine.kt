@@ -8,21 +8,34 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
-import androidx.preference.PreferenceManager
 
 class ThemeEngine(context: Context) {
-    private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+    private val prefs = context.getSharedPreferences("theme_engine_prefs", Context.MODE_PRIVATE)
+
+    private var isFirstStart
+        get() = prefs.getBoolean(FIRST_START, true)
+        set(value) = prefs.edit { putBoolean(FIRST_START, value) }
+
+    init {
+        if (isFirstStart) {
+            setDefaultValues(context)
+            isFirstStart = false
+        }
+    }
 
     /**
      * Returns current [ThemeMode].
      * Setting this property applies the given theme mode to the activity.
      */
     var themeMode: Int
-        get() = prefs.getInt(THEME_MODE, 0)
+        get() = prefs.getInt(THEME_MODE, ThemeMode.AUTO)
         set(value) {
+            require(value in 0..2) {
+                "Incompatible value! Set this property with help of ThemeMode object."
+            }
             prefs.edit { putInt(THEME_MODE, value) }
             AppCompatDelegate.setDefaultNightMode(
-                when (themeMode) {
+                when (value) {
                     ThemeMode.LIGHT -> AppCompatDelegate.MODE_NIGHT_NO
                     ThemeMode.DARK -> AppCompatDelegate.MODE_NIGHT_YES
                     else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
@@ -52,15 +65,15 @@ class ThemeEngine(context: Context) {
      * @return a dynamic theme if [isDynamicTheme] is enabled or a static theme otherwise.
      */
     fun getTheme(): Int {
-        return if (hasS() && isDynamicTheme) R.style.Theme_ThemeEngine_Dynamic else staticTheme
+        return if (hasS() && isDynamicTheme) R.style.Theme_ThemeEngine_Dynamic else staticTheme.themeId
     }
 
     /**
      * Get current static app theme, the theme which is used when dynamic color is disabled
      */
-    var staticTheme
-        get() = prefs.getInt(APP_THEME, R.style.Theme_ThemeEngine_Blue)
-        set(value) = prefs.edit { putInt(APP_THEME, value) }
+    var staticTheme: Theme
+        get() = Theme.values()[prefs.getInt(APP_THEME, 1)]
+        set(value) = prefs.edit { putInt(APP_THEME, value.ordinal) }
 
     /**
      * Resets static theme
@@ -72,6 +85,13 @@ class ThemeEngine(context: Context) {
     var isTrueBlack
         get() = prefs.getBoolean(TRUE_BLACK, false)
         set(value) = prefs.edit { putBoolean(TRUE_BLACK, value) }
+
+    private fun setDefaultValues(context: Context) {
+        isTrueBlack = context.getBooleanSafe(R.bool.true_black, false)
+        themeMode = context.getIntSafe(R.integer.theme_mode, ThemeMode.AUTO)
+        prefs.edit { putInt(APP_THEME, context.getIntSafe(R.integer.static_theme, 1)) }
+        isDynamicTheme = context.getBooleanSafe(R.bool.dynamic_theme, hasS()) && hasS()
+    }
 
     companion object {
         private var INSTANCE: ThemeEngine? = null
@@ -119,6 +139,7 @@ class ThemeEngine(context: Context) {
         private const val DYNAMIC_THEME = "dynamic_theme"
         private const val APP_THEME = "app_theme"
         private const val TRUE_BLACK = "true_black"
+        private const val FIRST_START = "first_start"
     }
 }
 

@@ -11,11 +11,11 @@ class ColorAdapter(private val colorArray: List<Int>) :
     var checkedPosition = -1
     private set
 
-    fun setCheckedPosition(value: Int) {
+    fun setCheckedPosition(value: Theme) {
         val lastCheckedPosition: Int = checkedPosition
-        checkedPosition = value
+        checkedPosition = value.ordinal
         notifyItemChanged(lastCheckedPosition)
-        notifyItemChanged(value)
+        notifyItemChanged(checkedPosition)
     }
 
     init {
@@ -44,7 +44,6 @@ class ColorAdapter(private val colorArray: List<Int>) :
     }
 
     override fun getItemCount() = colorArray.size
-
 
     inner class ViewHolder(val binding: ItemColorBinding) : RecyclerView.ViewHolder(binding.root) {
         init {

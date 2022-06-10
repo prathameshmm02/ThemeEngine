@@ -1,69 +1,26 @@
 package com.quickersilver.themeengine
 
-object Themes {
-    val themes = listOf(
-        R.style.Theme_ThemeEngine_Amber,
-        R.style.Theme_ThemeEngine_Blue,
-        R.style.Theme_ThemeEngine_BlueVariant,
-        R.style.Theme_ThemeEngine_Brown,
-        R.style.Theme_ThemeEngine_Cyan,
-        R.style.Theme_ThemeEngine_DeepOrange,
-        R.style.Theme_ThemeEngine_DeepPurple,
-        R.style.Theme_ThemeEngine_Green,
-        R.style.Theme_ThemeEngine_Indigo,
-        R.style.Theme_ThemeEngine_LightBlue,
-        R.style.Theme_ThemeEngine_LightGreen,
-        R.style.Theme_ThemeEngine_Lime,
-        R.style.Theme_ThemeEngine_Orange,
-        R.style.Theme_ThemeEngine_Pink,
-        R.style.Theme_ThemeEngine_Purple,
-        R.style.Theme_ThemeEngine_Red,
-        R.style.Theme_ThemeEngine_Teal,
-        R.style.Theme_ThemeEngine_Violet,
-        R.style.Theme_ThemeEngine_Yellow,
-    )
+import androidx.annotation.ColorRes
+import androidx.annotation.StyleRes
 
-    val primaryColorsLight = listOf(
-        R.color.amber_light_primary,
-        R.color.blue_light_primary,
-        R.color.blue_variant_light_primary,
-        R.color.brown_light_primary,
-        R.color.cyan_light_primary,
-        R.color.deep_orange_light_primary,
-        R.color.deep_purple_light_primary,
-        R.color.green_light_primary,
-        R.color.indigo_light_primary,
-        R.color.light_blue_light_primary,
-        R.color.light_green_light_primary,
-        R.color.lime_light_primary,
-        R.color.orange_light_primary,
-        R.color.pink_light_primary,
-        R.color.purple_light_primary,
-        R.color.red_light_primary,
-        R.color.teal_light_primary,
-        R.color.violet_light_primary,
-        R.color.yellow_light_primary
-    )
-
-    val primaryColorsDark = listOf(
-        R.color.amber_dark_primary,
-        R.color.blue_dark_primary,
-        R.color.blue_variant_dark_primary,
-        R.color.brown_dark_primary,
-        R.color.cyan_dark_primary,
-        R.color.deep_orange_dark_primary,
-        R.color.deep_purple_dark_primary,
-        R.color.green_dark_primary,
-        R.color.indigo_dark_primary,
-        R.color.light_blue_dark_primary,
-        R.color.light_green_dark_primary,
-        R.color.lime_dark_primary,
-        R.color.orange_dark_primary,
-        R.color.pink_dark_primary,
-        R.color.purple_dark_primary,
-        R.color.red_dark_primary,
-        R.color.teal_dark_primary,
-        R.color.violet_dark_primary,
-        R.color.yellow_dark_primary,
-    )
+enum class Theme(@StyleRes val themeId: Int, @ColorRes val primaryColor: Int) {
+    Amber(R.style.Theme_ThemeEngine_Amber, R.color.amber_primary),
+    Blue(R.style.Theme_ThemeEngine_Blue, R.color.blue_primary),
+    BlueVariant(R.style.Theme_ThemeEngine_BlueVariant, R.color.blue_variant_primary),
+    Brown(R.style.Theme_ThemeEngine_Brown, R.color.brown_primary),
+    Cyan(R.style.Theme_ThemeEngine_Cyan, R.color.cyan_primary),
+    DeepOrange(R.style.Theme_ThemeEngine_DeepOrange, R.color.deep_orange_primary),
+    DeepPurple(R.style.Theme_ThemeEngine_DeepPurple, R.color.deep_purple_primary),
+    Green(R.style.Theme_ThemeEngine_Green, R.color.green_primary),
+    Indigo(R.style.Theme_ThemeEngine_Indigo, R.color.indigo_primary),
+    LightBlue(R.style.Theme_ThemeEngine_LightBlue, R.color.light_blue_primary),
+    LightGreen(R.style.Theme_ThemeEngine_LightGreen, R.color.light_green_primary),
+    Lime(R.style.Theme_ThemeEngine_Lime, R.color.lime_primary),
+    Orange(R.style.Theme_ThemeEngine_Orange, R.color.orange_primary),
+    Pink(R.style.Theme_ThemeEngine_Pink, R.color.pink_primary),
+    Purple(R.style.Theme_ThemeEngine_Purple, R.color.purple_primary),
+    Red(R.style.Theme_ThemeEngine_Red, R.color.red_primary),
+    Teal(R.style.Theme_ThemeEngine_Teal, R.color.teal_primary),
+    Violet(R.style.Theme_ThemeEngine_Violet, R.color.violet_primary),
+    Yellow(R.style.Theme_ThemeEngine_Yellow, R.color.yellow_primary)
 }
