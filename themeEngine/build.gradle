@@ -3,9 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+version = library_version
+
 ext {
     PUBLISH_GROUP_ID = 'io.github.prathameshmm02.themeEngine'
-    PUBLISH_VERSION = '1.0.1'
+    PUBLISH_VERSION = version
     PUBLISH_ARTIFACT_ID = 'themeEngine'
     PUBLISH_DESCRIPTION = 'A Material Design 3 Theme Engine for Android'
     PUBLISH_URL = 'https://github.com/prathameshmm02/ThemeEngine'
